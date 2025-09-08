@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>iVoteSA Prototype</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      text-align: center;
+      padding: 2rem;
+    }
+    .container {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      max-width: 400px;
+      margin: auto;
+    }
+    button {
+      margin: 10px;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .yes { background: #2ecc71; color: white; }
+    .no { background: #e74c3c; color: white; }
+    #receipt {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #333;
+    }
+    #results {
+      margin-top: 30px;
+      background: #f1f1f1;
+      padding: 15px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>🗳️ iVoteSA – Demo Poll</h1>
+    <p><strong>Question:</strong> Should iVoteSA become a nationwide civic platform?</p>
+
+    <button class="yes" onclick="castVote('YES')">YES ✅</button>
+    <button class="no" onclick="castVote('NO')">NO ❌</button>
+
+    <div id="receipt"></div>
+
+    <div id="results">
+      <h2>Live Results</h2>
+      <p>YES: <span id="yesCount">0</span></p>
+      <p>NO: <span id="noCount">0</span></p>
+      <p>Total Votes: <span id="total">0</span></p>
+    </div>
+  </div>
+
+  <script>
+    let yesVotes = 0;
+    let noVotes = 0;
+    let totalVotes = 0;
+
+    function generateReceipt() {
+      return Math.random().toString(36).substr(2, 6).toUpperCase();
+    }
+
+    function castVote(choice) {
+      totalVotes++;
+      if (choice === 'YES') {
+        yesVotes++;
+      } else {
+        noVotes++;
+      }
+
+      let receiptCode = generateReceipt();
+      document.getElementById("receipt").innerHTML =
+        "✅ Your vote has been recorded. Receipt Code: <br><code>" + receiptCode + "</code>";
+
+      document.getElementById("yesCount").innerText = yesVotes;
+      document.getElementById("noCount").innerText = noVotes;
+      document.getElementById("total").innerText = totalVotes;
+    }
+  </script>
+
+</body>
+</html>
